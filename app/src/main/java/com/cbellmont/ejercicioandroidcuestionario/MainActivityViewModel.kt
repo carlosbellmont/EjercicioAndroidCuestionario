@@ -41,10 +41,10 @@ class MainActivityViewModel  : ViewModel() {
     private fun cargarPreguntas() {
         preguntas.addAll(
             mutableListOf(
-                Pregunta(" ¿A qué lugares te gustaría viajar?", listOf(Respuesta("Contigo a cualquier lado", true), Respuesta("Sin ti a cualquier lado", false)), null),
+                Pregunta("¿A qué lugares te gustaría viajar?", listOf(Respuesta("Contigo a cualquier lado", true), Respuesta("Sin ti a cualquier lado", false)), null),
                 Pregunta("¿Qué tipo de música escuchas para relajarte?", listOf(Respuesta("Tu dulce voz", true), Respuesta("Cualquier cosa que no sean tus berridos me relajan", false)), null),
                 Pregunta("¿Con cuál de mis familiares te llevas mejor?", listOf(Respuesta("Con tu madre", true), Respuesta("Imposible de elegir entre tanto horror", false)), null),
-                Pregunta("¿Qué te gusta hacer cuando tienes tiempo libre?", listOf(Respuesta("Estar contigo", true), Respuesta("Preparar mi plan de fuga", false)), null)
+                Pregunta("¿Qué te gusta hacer cuando tienes tiempo libre?", listOf(Respuesta("Estar contigo", true), Respuesta("Preparar mi plan de fuga a marte", false)), null)
             )
         )
     }
