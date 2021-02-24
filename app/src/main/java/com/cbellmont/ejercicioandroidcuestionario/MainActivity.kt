@@ -1,13 +1,13 @@
 package com.cbellmont.ejercicioandroidcuestionario
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.activity_main.*
+import com.cbellmont.ejercicioandroidcuestionario.databinding.ActivityMainBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -21,19 +21,21 @@ class MainActivity : AppCompatActivity(), AllRadioChecked {
 
     private var adapter : PreguntaAdapter = PreguntaAdapter(this)
     private lateinit var model :MainActivityViewModel
+    private lateinit var binding : ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         model = ViewModelProvider(this).get(MainActivityViewModel::class.java)
 
         createRecyclerView()
         setPreguntas()
-        bCompatibilidad.setOnClickListener {
+        binding.bCompatibilidad.setOnClickListener {
             val builder = AlertDialog.Builder(this)
             builder.setTitle("Medidor de Compatibilidad")
 
-            builder.setMessage("Los resultados son: ${model.calcularCompatibilidad()}")
+            builder.setMessage("Los resultados son: ${model.calcularCompatibilidad()}. Que vas ?")
 
 
             builder.setPositiveButton("Cortar con la pareja") { dialog, which ->
@@ -53,8 +55,8 @@ class MainActivity : AppCompatActivity(), AllRadioChecked {
     }
 
     private fun createRecyclerView() {
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = adapter
+        binding.recyclerView.layoutManager = LinearLayoutManager(this)
+        binding.recyclerView.adapter = adapter
     }
 
     private fun setPreguntas(){
@@ -80,12 +82,12 @@ class MainActivity : AppCompatActivity(), AllRadioChecked {
     }
 
     fun hideProgressBarAndShowButton(){
-        pbLoading.visibility = View.GONE
-        bCompatibilidad.visibility = View.VISIBLE
+        binding.pbLoading.visibility = View.GONE
+        binding.bCompatibilidad.visibility = View.VISIBLE
     }
 
     override fun onAllRadioChecked() {
-        bCompatibilidad.isEnabled = true
+        binding.bCompatibilidad.isEnabled = true
     }
 
 
