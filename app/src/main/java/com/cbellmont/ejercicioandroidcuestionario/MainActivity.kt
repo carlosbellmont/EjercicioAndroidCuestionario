@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.cbellmont.ejercicioandroidcuestionario.databinding.ActivityMainBinding
 import kotlinx.coroutines.CoroutineScope
@@ -60,7 +61,7 @@ class MainActivity : AppCompatActivity(), AllRadioChecked {
     }
 
     private fun setPreguntas(){
-        CoroutineScope(Dispatchers.IO).launch {
+        lifecycleScope.launch {
             for (i in 0 until model.preguntasSize()) {
                 val pregunta = loadPregunta(i)
                 setPreguntaEnAdapter(pregunta)
@@ -70,15 +71,12 @@ class MainActivity : AppCompatActivity(), AllRadioChecked {
     }
 
     private suspend fun loadPregunta(position : Int) : Pregunta {
-        return withContext(Dispatchers.IO) {
-            return@withContext model.getPregunta(position)
-        }
+        return model.getPregunta(position)
+
     }
 
     private suspend fun setPreguntaEnAdapter(pregunta : Pregunta) {
-        withContext(Dispatchers.Main) {
-            adapter.addPreguntaToList(pregunta)
-        }
+        adapter.addPreguntaToList(pregunta)
     }
 
     fun hideProgressBarAndShowButton(){
